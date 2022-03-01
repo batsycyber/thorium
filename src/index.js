@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const mongoose = require('mongoose')
-mongoose.connect("mongodb+srv://users-open-to-all:hiPassword123@cluster0.uh35t.mongodb.net/Irshad_Mir-db?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://taabish:lkmgsyjhwbQYgkvX@cluster0.cp3ka.mongodb.net/mohsinali8979?retryWrites=true&w=majority",
 	{ useNewUrlParser: true })
 	.then(() => console.log('mongodb running on 27017 and connected'))
 	.catch(err => console.log(err))

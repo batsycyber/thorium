@@ -29,4 +29,4 @@ const BooksSchema = new mongoose.Schema({
   
  {timestamps: true})
 
-    module.exports = mongoose.model('Books', BooksSchema)
+    module.exports = mongoose.model('Bookss', BooksSchema)
