@@ -9,7 +9,8 @@ router.post("/author", BookController.createAuthor)
 router.post("/publisher", BookController.createpublisher)
 router.post("/createBook", BookController.createBook  )
 router.get("/getBooksData", BookController.getBook)
-
+router.put("/putBook", BookController.putBook)
+router.put("/updatePrice", BookController.updatePrice)
 module.exports = router;
 // const express = require('express');
 // const router = express.Router();
