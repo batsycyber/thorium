@@ -7,10 +7,21 @@ const userModel = require("../models/userSchema");
 
 // 1
 const createUsers=async function(req, res) {
+  try{
     var data=req.body
-    let saveData= await userModel.create(data)
-    res.send({msg:saveData})     
+    console.log(data)
+        if ( Object.keys(data).length != 0) {
+   let saveData= await userModel.create(data)
+    res.status(201).send({msg:saveData})
+        }
+else res.status(400).send({ msg: "BAD REQUEST"})   
   }
+  catch (err) {
+    console.log("This is the error :", err.message)
+    res.status(500).send({ msg: "Error", error: err.message })
+  }
+}
+
 
 // 2
   const login= async function(req,res) {
@@ -18,7 +29,7 @@ const createUsers=async function(req, res) {
     let password=req.body.password
     let user = await userModel.findOne({ emaiId:emailId, password:password });
      if (!user)
-    return res.send({msg: "username or the password is not corerct"});
+    return res.status(400).send({msg: "username or the password is not corerct"});
 
     let token = jwt.sign({userId: user._id.toString()},
       "mohsin-ali"
@@ -33,7 +44,7 @@ const createUsers=async function(req, res) {
     let user = await userModel.findById(userId);
   
     if (!user) {
-      return res.send("No such user exists");
+      return res.status(404).send("No such user exists");
     }
   
     let userData = req.body;
