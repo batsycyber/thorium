@@ -1,5 +1,6 @@
 let axios = require("axios")
 
+// 1
 
 let getStates = async function (req, res) {
 
@@ -19,6 +20,7 @@ let getStates = async function (req, res) {
     }
 }
 
+// 2
 
 let getDistricts = async function (req, res) {
     try {
@@ -38,6 +40,8 @@ let getDistricts = async function (req, res) {
     }
 }
 
+// 3
+
 let getByPin = async function (req, res) {
     try {
         let pin = req.query.pincode
@@ -56,6 +60,8 @@ let getByPin = async function (req, res) {
         res.status(500).send({ msg: err.message })
     }
 }
+
+// 4
 
 let getOtp = async function (req, res) {
     try {
@@ -77,6 +83,33 @@ let getOtp = async function (req, res) {
         res.status(500).send({ msg: err.message })
     }
 }
+
+// 5
+
+let sessionByDistrictId = async function (req, res){
+    try{
+        let districts = req.query.district_id
+        let date = req.query.date
+      if(districts && date){
+
+        let options = {
+            method: "GET",
+            url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${districts}&date=${date}`
+        }
+        let result = await axios(options)
+        res.status(200).send({status: true, msg: result.data})
+
+      }else{
+          res.status(400).send({status: false, msg: "where is your input buddy"})
+      }  
+
+    }catch (err){
+        res.status(500).send({msg: err.message})
+    }
+}
+
+
+module.exports.sessionByDistrictId = sessionByDistrictId
 
 
 module.exports.getStates = getStates
